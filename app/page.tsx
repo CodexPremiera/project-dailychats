@@ -1,22 +1,20 @@
 import React from "react";
 import ChatHeader from "@/components/ChatHeader";
 import { supabaseServer } from "@/lib/supabase/server";
-import InitUser from "@/lib/store/initUser";
-import { Input } from "@/components/ui/input";
+import InitUser from "@/lib/store/InitUser";
+import ChatInput from "@/components/ChatInput";
 
 export default async function Page() {
   const supabase = await supabaseServer();
   const { data } = await supabase.auth.getSession();
-
-  console.log(data);
 
   return (
     <>
       <div className="max-w-3xl mx-auto md:py-10 h-screen">
         <div className=" h-full border rounded-md flex flex-col">
           <ChatHeader user={data.session?.user} />
-
-          <div className="flex-1 flex flex-col p-5 h-full overflow-y-auto scrollbar-thin">
+          <div className="flex-1 flex flex-col p-5 h-full overflow-y-auto">
+            <div className="flex-1 "></div>
             <div className=" space-y-7">
               {[1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12].map(
                 (value) => {
@@ -47,10 +45,7 @@ export default async function Page() {
               )}
             </div>
           </div>
-
-          <div className="p-5">
-            <Input placeholder="send message" />
-          </div>
+          <ChatInput />
         </div>
       </div>
       <InitUser user={data.session?.user} />
