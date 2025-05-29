@@ -29,8 +29,8 @@ export default function ChatHeader({ user }: Props) {
   };
 
   return (
-    <div className="h-20">
-      <div className="p-5 border-b flex items-center justify-between">
+    <div className="h-fit">
+      <div className="p-5 border-b flex items-center justify-between ">
         <div>
           <h1 className="text-xl font-bold">Daily Chat</h1>
           <div className="flex items-center gap-1">
