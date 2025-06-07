@@ -35,7 +35,6 @@ export default function ChatInput() {
     // Update UI immediately
     addMessage(newMessage as Imessage);
     setOptimisticIds(newMessage.id);
-    console.log(newMessage)
 
     // Save the message in the Supabase database
     const { error } = await supabase.from("messages").insert({ id, text });

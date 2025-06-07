@@ -2,14 +2,12 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { supabaseBrowser } from "@/lib/supabase/browser";
-import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
+import {useUser} from "@/lib/store/user";
 
-interface Props {
-  user: User | undefined;
-}
 
-export default function ChatHeader({ user }: Props) {
+export default function ChatHeader() {
+  const user = useUser(state => state.user);
   const router = useRouter();
 
   const handleLoginWithGithub = () => {
