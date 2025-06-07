@@ -3,11 +3,11 @@ import React from "react";
 import { Button } from "./ui/button";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 import { useRouter } from "next/navigation";
-import {useUser} from "@/lib/store/user";
+import ChatPresence from "@/components/ChatPresence";
+import {User} from "@supabase/supabase-js";
 
 
-export default function ChatHeader() {
-  const user = useUser(state => state.user);
+export default function ChatHeader({ user }: { user: User | undefined }) {
   const router = useRouter();
 
   const handleLoginWithGithub = () => {
@@ -31,10 +31,7 @@ export default function ChatHeader() {
       <div className="p-5 border-b flex items-center justify-between ">
         <div>
           <h1 className="text-xl font-bold">Daily Chat</h1>
-          <div className="flex items-center gap-1">
-            <div className="h-4 w-4 bg-green-500 rounded-full animate-pulse"></div>
-            <h1 className="text-sm text-gray-400">2 onlines</h1>
-          </div>
+          <ChatPresence />
         </div>
         {user ? (
           <Button onClick={handleLogout}>Logout</Button>
