@@ -23,6 +23,7 @@ export default function ChatHeader({ user }: { user: User | undefined }) {
   const handleLogout = async () => {
     const supabase = supabaseBrowser();
     await supabase.auth.signOut();
+
     router.refresh();
   };
 
