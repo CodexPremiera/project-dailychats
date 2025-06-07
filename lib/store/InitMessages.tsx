@@ -3,11 +3,7 @@ import React, { useEffect, useRef } from "react";
 
 import { Imessage, useMessage } from "./messages";
 
-interface Props {
-  messages: Imessage[];
-}
-
-export default function InitMessages({ messages }: Props) {
+export default function InitMessages({ messages }: { messages: Imessage[] }) {
   const initState = useRef(false);
   useEffect(() => {
     if (!initState.current) {

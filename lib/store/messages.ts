@@ -1,3 +1,4 @@
+import { User } from "@supabase/supabase-js";
 import { create } from "zustand";
 
 export type Imessage = {
@@ -16,8 +17,11 @@ export type Imessage = {
 
 interface MessageState {
   messages: Imessage[];
+  addMessage: (message: Imessage) => void;
 }
 
 export const useMessage = create<MessageState>()((set) => ({
   messages: [],
+  addMessage: (message) =>
+    set((state) => ({ messages: [...state.messages, message] })),
 }));
