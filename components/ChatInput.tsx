@@ -10,6 +10,7 @@ import { Imessage, useMessage } from "@/lib/store/messages";
 export default function ChatInput() {
   const user = useUser((state) => state.user);
   const addMessage = useMessage((state) => state.addMessage);
+  const setOptimisticIds = useMessage((state) => state.setOptimisticIds);
 
   const supabase = supabaseBrowser();
 
@@ -33,6 +34,7 @@ export default function ChatInput() {
 
     // Update UI immediately
     addMessage(newMessage as Imessage);
+    setOptimisticIds(newMessage.id);
     console.log(newMessage)
 
     // Save the message in the Supabase database
