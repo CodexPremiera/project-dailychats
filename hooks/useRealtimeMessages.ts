@@ -5,7 +5,7 @@ import {Imessage, useMessage} from "@/lib/store/messages";
 import {useEffect} from "react";
 
 
-export function useRealtimeMessages() {
+export function useRealtimeMessages(scrollRef, setNotification) {
   const {
     addMessage,
     optimisticIds,
@@ -17,9 +17,18 @@ export function useRealtimeMessages() {
     const supabase = supabaseBrowser();
     const channel = supabase
       .channel("chat-room")
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, (payload) =>
-        handleInsert(payload, optimisticIds, addMessage)
-      )
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, (payload) => {
+        handleInsert(payload, optimisticIds, addMessage);
+        const scrollContainer = scrollRef.current;
+        if (
+          scrollContainer.scrollTop <
+          scrollContainer.scrollHeight -
+          scrollContainer.clientHeight -
+          10
+        ) {
+          setNotification((current) => current + 1);
+        }
+      })
       .on("postgres_changes", { event: "DELETE", schema: "public", table: "messages" }, (payload) =>
         handleDelete(payload, optimisticDeleteMessage)
       )
