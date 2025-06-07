@@ -17,7 +17,7 @@ function InitUser( {user} : Props ) {
     }
 
     initState.current = true;
-  }, []);
+  }, [user]);
 
   return (
     <></>

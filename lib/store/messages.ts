@@ -1,4 +1,3 @@
-import { User } from "@supabase/supabase-js";
 import { create } from "zustand";
 
 export type Imessage = {
@@ -55,7 +54,7 @@ export const useMessage = create<MessageState>()((set) => ({
       return {
         messages: state.messages.filter((message) => {
           if (message.id === updateMessage.id) {
-            (message.text = updateMessage.text),
+            (message.text = updateMessage.text);
               (message.is_edit = updateMessage.is_edit);
           }
           return message;

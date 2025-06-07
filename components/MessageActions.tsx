@@ -18,14 +18,12 @@ import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import React, { useRef } from "react";
 
 export function DeleteAlert() {
@@ -36,7 +34,9 @@ export function DeleteAlert() {
 
   const handleDeleteMessage = async () => {
     const supabase = supabaseBrowser();
-    optimisticDeleteMessage(actionMessage?.id!);
+    if (actionMessage?.id) {
+      optimisticDeleteMessage(actionMessage.id);
+    }
 
     const { error } = await supabase
       .from("messages")

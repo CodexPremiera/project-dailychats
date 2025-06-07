@@ -21,8 +21,8 @@ export default function Message({ message }: { message: Imessage }) {
     <div className="flex gap-2">
       <div>
         <Image
-          src={message.users?.avatar_url!}
-          alt={message.users?.display_name!}
+          src={message.users?.avatar_url ?? "https://picsum.photos/50"}
+          alt={message.users?.display_name ?? "Anonymous"}
           width={40}
           height={40}
           className=" rounded-full ring-2"

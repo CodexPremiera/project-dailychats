@@ -1,9 +1,7 @@
 "use client";
-import { Imessage, useMessage } from "@/lib/store/messages";
+import { useMessage } from "@/lib/store/messages";
 import React, { useEffect, useRef, useState } from "react";
 import Message from "./Message";
-import { supabaseBrowser } from "@/lib/supabase/browser";
-import { toast } from "sonner";
 import { ArrowDown } from "lucide-react";
 import {DeleteAlert, EditAlert} from "@/components/MessageActions";
 import {useRealtimeMessages} from "@/hooks/useRealtimeMessages";
@@ -38,7 +36,7 @@ export default function ListMessages() {
     if (scrollContainer && !userScrolled) {
       scrollContainer.scrollTop = scrollContainer.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, userScrolled]);
 
   const scrollDown = () => {
     setNotification(0);

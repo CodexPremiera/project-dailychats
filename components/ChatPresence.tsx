@@ -16,7 +16,7 @@ export default function ChatPresence() {
         console.log("Synced presence state: ", channel.presenceState());
         const userIds = [];
         for (const id in channel.presenceState()) {
-          // @ts-ignore
+          // @ts-expect-error
           userIds.push(channel.presenceState()[id][0].user_id);
         }
         setOnlineUsers([...new Set(userIds)].length);
@@ -29,7 +29,7 @@ export default function ChatPresence() {
           });
         }
       });
-  }, [user]);
+  }, [user, supabase]);
 
   if (!user) {
     return <div className=" h-3 w-1"></div>;
