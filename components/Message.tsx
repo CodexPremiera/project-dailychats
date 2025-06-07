@@ -1,4 +1,4 @@
-import { Imessage } from "@/lib/store/messages";
+import {Imessage, useMessage} from "@/lib/store/messages";
 
 import React from "react";
 import Image from "next/image";
@@ -31,12 +31,17 @@ export default function Message({ message }: { message: Imessage }) {
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-            <h1 className="font-bold">{message.users?.display_name}</h1>
-            <h1 className="text-sm text-gray-400">
+            <span className="font-bold">{message.users?.display_name}</span>
+            <span className="text-sm text-gray-400">
               {new Date(message.created_at).toDateString()}
-            </h1>
+            </span>
+            {message.is_edit && (
+              <h1 className="text-sm text-gray-400">edited</h1>
+            )}
           </div>
-          {message.users?.id === user?.id && <MessageMenu />}
+          {message.users?.id === user?.id && (
+            <MessageMenu message={message}/>
+          )}
         </div>
 
         <p className="text-gray-300">{message.text}</p>
@@ -45,7 +50,9 @@ export default function Message({ message }: { message: Imessage }) {
   );
 }
 
-const MessageMenu = () => {
+const MessageMenu = ({ message }: { message: Imessage }) => {
+  const setActionMessage = useMessage(state => state.setActionMessage);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -54,8 +61,22 @@ const MessageMenu = () => {
       <DropdownMenuContent>
         <DropdownMenuLabel>Action</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Delete</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            document.getElementById("trigger-edit")?.click();
+            setActionMessage(message);
+          }}
+        >
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            document.getElementById("trigger-delete")?.click();
+            setActionMessage(message);
+          }}
+        >
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

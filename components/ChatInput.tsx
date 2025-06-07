@@ -14,12 +14,11 @@ export default function ChatInput() {
   const supabase = supabaseBrowser();
 
   const handleSendMessage = async (text: string) => {
-    // If message is empty
     if (!text.trim()) return;
 
-    // Add the message to the local UI immediately
-    addMessage({
-      id: uuidv4(),
+    const id = uuidv4();
+    const newMessage = {
+      id: id,
       text,
       send_by: user?.id,
       is_edit: false,
@@ -30,10 +29,14 @@ export default function ChatInput() {
         created_at: new Date().toISOString(),
         display_name: user?.user_metadata.user_name,
       },
-    } as Imessage);
+    };
+
+    // Update UI immediately
+    addMessage(newMessage as Imessage);
+    console.log(newMessage)
 
     // Save the message in the Supabase database
-    const { error } = await supabase.from("messages").insert({ text });
+    const { error } = await supabase.from("messages").insert({ id, text });
     if (error)
       toast.error(error.message);
   };
