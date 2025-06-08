@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { type CookieOptions, createServerClient } from "@supabase/ssr";
-import {RequestCookies, ResponseCookies} from "next/dist/compiled/@edge-runtime/cookies";
 
 export async function GET(request: Request) {
 	const { searchParams, origin } = new URL(request.url);
@@ -10,7 +9,7 @@ export async function GET(request: Request) {
 	const next = searchParams.get("next") ?? "/";
 
 	if (code) {
-		const cookieStore: Omit<RequestCookies, "set" | "clear" | "delete"> & Pick<ResponseCookies, "set" | "delete"> = await cookies();
+		const cookieStore = await cookies();
 		const supabase = createServerClient(
 			process.env.NEXT_PUBLIC_SUPABASE_URL!,
 			process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
