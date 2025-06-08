@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
 export type Imessage = {
-  created_at: string;
+  created_at: string | null;
   id: string;
-  is_edit: boolean;
-  send_by: string;
+  is_edit: boolean | null;
+  send_by: string | null;
   text: string;
   users: {
-    avatar_url: string;
+    avatar_url: string | null;
     created_at: string;
-    display_name: string;
+    display_name: string | null;
     id: string;
   } | null;
 };
