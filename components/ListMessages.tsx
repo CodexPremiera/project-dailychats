@@ -1,6 +1,6 @@
 "use client";
 import { useMessage } from "@/lib/store/messages";
-import React, { useEffect, useRef, useState } from "react";
+import React, {RefObject, useEffect, useRef, useState} from "react";
 import Message from "./Message";
 import { ArrowDown } from "lucide-react";
 import {DeleteAlert, EditAlert} from "@/components/MessageActions";
@@ -9,7 +9,7 @@ import {useRealtimeMessages} from "@/hooks/useRealtimeMessages";
 export default function ListMessages() {
   const messages = useMessage((state) => state.messages);
 
-  const scrollRef = useRef() as React.MutableRefObject<HTMLElement>;
+  const scrollRef = useRef(undefined) as RefObject<any>;
   const [userScrolled, setUserScrolled] = useState(false);
   const [notification, setNotification] = useState(0);
 
