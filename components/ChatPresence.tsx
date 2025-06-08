@@ -20,7 +20,6 @@ export default function ChatPresence() {
 
         const userIds = [];
         for (const id in presence) {
-          // @ts-expect-error: presenceState typing is too generic
           userIds.push(presence[id][0].user_id);
         }
         setOnlineUsers([...new Set(userIds)].length);
