@@ -36,17 +36,17 @@ export function DeleteAlert() {
     const supabase = supabaseBrowser();
     if (actionMessage?.id) {
       optimisticDeleteMessage(actionMessage.id);
-    }
 
-    const { error } = await supabase
-      .from("messages")
-      .delete()
-      .eq("id", actionMessage?.id!);
+      const { error } = await supabase
+        .from("messages")
+        .delete()
+        .eq("id", actionMessage.id);
 
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Successfully delete a message");
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("Successfully delete a message");
+      }
     }
   };
 
@@ -94,16 +94,20 @@ export function EditAlert() {
         text,
         is_edit: true,
       } as Imessage);
-      const { error } = await supabase
-        .from("messages")
-        .update({ text, is_edit: true })
-        .eq("id", actionMessage?.id!);
-      if (error) {
-        toast.error(error.message);
-      } else {
-        toast.success("Update Successfully");
+
+      if (actionMessage?.id) {
+        const { error } = await supabase
+          .from("messages")
+          .update({ text, is_edit: true })
+          .eq("id", actionMessage.id);
+
+        if (error) {
+          toast.error(error.message);
+        } else {
+          toast.success("Update Successfully");
+        }
+        document.getElementById("trigger-edit")?.click();
       }
-      document.getElementById("trigger-edit")?.click();
     } else {
       document.getElementById("trigger-edit")?.click();
       document.getElementById("trigger-delete")?.click();

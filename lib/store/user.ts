@@ -5,6 +5,6 @@ interface UserState {
   user: User | undefined;
 }
 
-export const useUser = create<UserState>()((_) => ({
+export const useUser = create<UserState>()(() => ({
   user: undefined,
 }));
