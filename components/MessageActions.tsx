@@ -24,7 +24,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import React, { useRef } from "react";
+import React, {RefObject, useRef} from "react";
 
 export function DeleteAlert() {
   const actionMessage = useMessage((state) => state.actionMessage);
@@ -83,7 +83,7 @@ export function EditAlert() {
     (state) => state.optimisticUpdateMessage
   );
 
-  const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const inputRef = useRef<HTMLInputElement | null>(null) as RefObject<HTMLInputElement>;
 
   const handleEdit = async () => {
     const supabase = supabaseBrowser();

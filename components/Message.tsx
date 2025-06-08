@@ -33,7 +33,7 @@ export default function Message({ message }: { message: Imessage }) {
           <div className="flex items-center gap-1">
             <span className="font-bold">{message.users?.display_name}</span>
             <span className="text-sm text-gray-400">
-              {new Date(message.created_at).toDateString()}
+              {new Date(message.created_at!).toDateString()}
             </span>
             {message.is_edit && (
               <h1 className="text-sm text-gray-400">edited</h1>
