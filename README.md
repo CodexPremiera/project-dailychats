@@ -4,9 +4,15 @@ A responsive, realtime chat message component built with **React**, **Supabase**
 
 ---
 
+## 🔗 Live Site
+
+👉 [Visit the Live Demo](https://project-dailychats.vercel.app/)
+
+---
+
 ## 📸 Demo
 
-![Chat Demo](./public/demo.gif) 
+![Chat Demo](./public/daily_chat_demo.gif) 
 
 ---
 
@@ -63,4 +69,4 @@ npm run dev
 
 ## 📄 License
 
-MIT © [Your Name](https://github.com/yourusername)
+MIT © [Ashley Ken Comandao](https://github.com/yourusername)
