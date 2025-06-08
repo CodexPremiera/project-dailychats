@@ -9,7 +9,7 @@ import {useRealtimeMessages} from "@/hooks/useRealtimeMessages";
 export default function ListMessages() {
   const messages = useMessage((state) => state.messages);
 
-  const scrollRef = useRef(null) as RefObject<HTMLDivElement>;
+  const scrollRef = useRef<HTMLDivElement | null>(null) as RefObject<HTMLDivElement>;
   const [userScrolled, setUserScrolled] = useState(false);
   const [notification, setNotification] = useState(0);
 
